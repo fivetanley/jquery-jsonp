@@ -8,7 +8,22 @@
  * This document is licensed as free software under the terms of the
  * MIT License: http://www.opensource.org/licenses/mit-license.php
  */
-( function( $ ) {
+ // jburke AMD plugin.
+// Uses AMD or browser globals to create a jQuery plugin.
+
+// It does not try to register in a CommonJS environment since
+// jQuery is not likely to run in those environments.
+// See jqueryPluginCommonJs.js for that version.
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}( function( $ ) {
 
 	// ###################### UTILITIES ##
 
@@ -285,5 +300,4 @@
 
 	// ###################### INSTALL in jQuery ##
 	$.jsonp = jsonp;
-
-} )( jQuery );
+}));
